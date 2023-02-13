@@ -93,6 +93,9 @@ func loadConfig(cfgJSON *extapi.JSON) (etcdProviderConfig, error) {
 	if err := json.Unmarshal(cfgJSON.Raw, &cfg); err != nil {
 		return cfg, fmt.Errorf("error decoding solver config: %v", err)
 	}
+	if cfg.Prefix == "" {
+		cfg.Prefix = "/skydns/"
+	}
 
 	return cfg, nil
 }
